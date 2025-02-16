@@ -1,8 +1,8 @@
-name: "Cloudflared Remote Server SSH Commands"
+name: "Cloudflared SSH Tunnel - Transfer file to server"
 branding:
   icon: "terminal"
   color: "orange"
-description: "Lets you SSH into a server behind a Cloudflare tunnel"
+description: "Lets you SCP onto a server behind a Cloudflare tunnel"
 inputs:
   host:
     description: "SSH host address"
@@ -19,13 +19,18 @@ inputs:
   private_key_value:
     description: "SSH private key value"
     required: true
-  commands:
-    description: "The commands to run on the remote server"
-    required: true
   service_token_id:
     description: "The Client ID of the Cloudflare service token"
+    required: true
   service_token_secret:
     description: "The Client Secret of the Cloudflare service token"
+    required: true
+  source:
+    description: "Source file"
+    required: true
+  target:
+    description: "Target destination file"
+    required: true
 runs:
   using: "docker"
   image: "Dockerfile"
@@ -35,6 +40,8 @@ runs:
     - ${{ inputs.username }}
     - ${{ inputs.private_key_filename }}
     - ${{ inputs.private_key_value }}
-    - ${{ inputs.commands }}
     - ${{ inputs.service_token_id }}
     - ${{ inputs.service_token_secret }}
+    - ${{ inputs.source }}
+    - ${{ inputs.target }}
+
