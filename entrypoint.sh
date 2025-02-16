@@ -2,11 +2,11 @@
 
 echo "Host $1" >> /root/.ssh/config
 
-if [ -z $7 ] && [ -z $8 ]
+if [ -z $6 ] && [ -z $7 ]
 then
     echo "ProxyCommand cloudflared access ssh --hostname %h" >> /root/.ssh/config
 else
-    echo "ProxyCommand cloudflared access ssh --hostname %h --id $7 --secret $8" >> /root/.ssh/config
+    echo "ProxyCommand cloudflared access ssh --hostname %h --id $6 --secret $7" >> /root/.ssh/config
 fi
 
 echo "$5" > /root/.ssh/$4
